@@ -1,35 +1,73 @@
 package ssafy.project07.service;
 
+
+import ssafy.project07.domain.*;
+import ssafy.project07.dto.supplement.SupplementIntakeRequest;
+import ssafy.project07.dto.supplement.AlarmSettingRequest;
+import ssafy.project07.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ssafy.project07.domain.Supplement;
-import ssafy.project07.dto.supplement.SupplementRegisterRequest;
-import ssafy.project07.repository.SupplementRepository;
+import ssafy.project07.repository.supplement.*;
+import ssafy.project07.repository.user.UserRepository;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class SupplementService {
 
-    // 레포지토리 생성
     private final SupplementRepository supplementRepository;
+    private final SupplementIntakeRepository supplementIntakeRepository;
+    private final CalendarLogRepository calendarLogRepository;
+    private final NotificationRepository notificationRepository;
+    private final UserRepository userRepository; // 로그인 기반 유저 참조용
 
-    // 파라미터 안에 dto 넣기
-    // dto의 역할은 어떤 데이터가 넘어오는지 받는 것
-    // 요청과 응답 데이터를 전달하는 순수 데이터 전용 객체
-    // 즉, 데이터는 dto 형태로 넘어오겠다 !!! 라는 것임
-    // service 에서 쓸만한 데이터 형태가 필요한데, 그 데이터 형태를 dto에서 만드는 것임
-    // 그 후 service 에서 레포지토리를 이용하여 저장이나 등등의 처리를 하는 것
-    
-    // 메서드 안에는 Entity(domain) 이 들어감
-    // dto형태의 데이터를 입력받아서, Entity 값에 넣어주고, 그것을 레포지토리에 저장하는 과정임
-    public void registerSupplement(SupplementRegisterRequest request) {
-        Supplement supplement = new Supplement();
-        supplement.setName(request.getName());
-        supplement.setDoseMg(request.getDoseMg());
-        supplement.setDailyLimit(request.getDailyLimit());
-        supplement.setIngredients(request.getIngredients());
+    // 복용 기록 저장
+    public void saveIntake(SupplementIntakeRequest request, Long userId) {
+        User user = userRepository.findById(userId).orElseThrow();
+        Supplement supplement = supplementRepository.findById(request.getSupplementId()).orElseThrow();
 
-        // 레포지토리에 동작
-        supplementRepository.save(supplement);
+        SupplementIntake intake = new SupplementIntake();
+        intake.setUser(user);
+        intake.setSupplement(supplement);
+        intake.setAmountTaken(request.getAmountTaken());
+        intake.setIntakeTime(request.getIntakeTime());
+
+        supplementIntakeRepository.save(intake);
+
+        // 캘린더 로그도 함께 저장
+        CalendarLog log = new CalendarLog();
+        log.setUser(user);
+        log.setDate(request.getIntakeTime().toLocalDate());
+        log.setSupplementName(supplement.getName());
+        log.setDoseMg(request.getAmountTaken());
+        log.setTimeTaken(request.getIntakeTime().toLocalTime());
+
+        calendarLogRepository.save(log);
+    }
+
+    // 캘린더 보기 (userID를 통해 캘린더 보기)
+    public List<CalendarLog> getCalendarLog(Long userId, LocalDate date) {
+        return calendarLogRepository.findByUserIdAndDate(userId, date);
+    }
+
+    // 알람 설정하기
+    public void setAlarm(Long userId, AlarmSettingRequest request) {
+        User user = userRepository.findById(userId).orElseThrow();
+
+        Notification notification = new Notification();
+        notification.setUser(user);
+        notification.setMessage(request.getMessage());
+        notification.setIsRead(false);
+        notification.setNotifiedAt(request.getAlarmTime().atDate(LocalDate.now()));
+
+        // 알람 정보 저장하기
+        notificationRepository.save(notification);
+    }
+
+    // 모든 영양제 리스트 보기
+    public List<Supplement> getAllSupplements() {
+        return supplementRepository.findAll();
     }
 }

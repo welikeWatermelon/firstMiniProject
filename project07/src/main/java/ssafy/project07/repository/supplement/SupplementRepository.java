@@ -1,4 +1,4 @@
-package ssafy.project07.repository;
+package ssafy.project07.repository.supplement;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import ssafy.project07.domain.Supplement;
