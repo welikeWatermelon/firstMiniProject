@@ -15,10 +15,8 @@ public class Notification {
     @Id @GeneratedValue
     private Long id;
     private String message;
-    private boolean isRead;
-    private LocalDateTime notifiedAt;
     private boolean IsRead;
-
+    private LocalDateTime notifiedAt;
     @ManyToOne
     private User user;
 }

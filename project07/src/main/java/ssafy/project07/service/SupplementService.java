@@ -4,7 +4,6 @@ package ssafy.project07.service;
 import ssafy.project07.domain.*;
 import ssafy.project07.dto.supplement.SupplementIntakeRequest;
 import ssafy.project07.dto.supplement.AlarmSettingRequest;
-import ssafy.project07.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ssafy.project07.repository.supplement.*;
