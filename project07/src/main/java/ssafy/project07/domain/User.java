@@ -16,7 +16,7 @@ public class User {
     @GeneratedValue
     private Long id;
     private String name;
-    private String email;
+    private String userId;
     private String password;
     private LocalDate birthDate;
     private String gender;

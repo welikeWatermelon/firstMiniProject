@@ -6,8 +6,8 @@ import ssafy.project07.domain.Quest;
 import ssafy.project07.domain.QuestHistory;
 import ssafy.project07.domain.User;
 import ssafy.project07.dto.quest.QuestCompleteRequest;
-import ssafy.project07.repository.Quest.QuestHistoryRepository;
-import ssafy.project07.repository.Quest.QuestRepository;
+import ssafy.project07.repository.quest.QuestHistoryRepository;
+import ssafy.project07.repository.quest.QuestRepository;
 import ssafy.project07.repository.user.UserRepository;
 
 import java.time.LocalDate;

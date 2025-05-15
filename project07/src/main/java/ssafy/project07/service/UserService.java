@@ -1,7 +1,6 @@
 package ssafy.project07.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ssafy.project07.domain.User;
 import ssafy.project07.dto.user.UserLoginRequest;
@@ -19,7 +18,7 @@ public class UserService {
     public void userRegister(UserRegisterRequest userRegisterRequest) {
         User user = new User();
         user.setName(userRegisterRequest.getName());
-        user.setEmail(userRegisterRequest.getEmail());
+        user.setUserId(userRegisterRequest.getEmail());
         user.setPassword(userRegisterRequest.getPassword());
         user.setBirthDate(userRegisterRequest.getBirthDate());
         user.setGender(userRegisterRequest.getGender());
@@ -53,7 +52,7 @@ public class UserService {
 
         UserProfileResponse response = new UserProfileResponse();
         response.setName(user.getName());
-        response.setEmail(user.getEmail());
+        response.setEmail(user.getUserId());
         response.setBirthDate(user.getBirthDate());
         response.setGender(user.getGender());
         response.setNickname(user.getNickname());

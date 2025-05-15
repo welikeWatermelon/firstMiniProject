@@ -1,22 +1,19 @@
-package ssafy.project07.domain;
+package ssafy.project07.dto.community;
 
-import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-@Entity
+@Data
 @Getter
 @Setter
-public class Column {
-    @Id @GeneratedValue
+public class CommunityResponse {
     private Long id;
     private String title;
     private String content;
+    private String authorName;
     private LocalDateTime createdAt;
-
-    @ManyToOne
-    private Pharmacist pharmacist;
+    private LocalDateTime updatedAt;
 }
