@@ -1,9 +1,6 @@
 package ssafy.project07.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,9 +17,19 @@ public class Pharmacist {
     private String title;
     private String profileImage;
 
+    private String licenseNumber; // 약사 면허 번호
+    private String hospitalName;  // 근무 병원명
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @OneToMany(mappedBy = "pharmacist")
     private List<Column> columns;
 
     @OneToMany(mappedBy = "pharmacist")
     private List<Follow> followers;
+
+
+
 }

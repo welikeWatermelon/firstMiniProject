@@ -6,6 +6,5 @@ import lombok.Data;
 public class PharmacistResponse {
     private Long id;
     private String name;
-    private String title;
     private String profileImage;
 }

@@ -23,6 +23,9 @@ public class SupplementController {
     @PostMapping("/intake")
     public void recordIntake(@RequestBody SupplementIntakeRequest request,
                              @RequestParam Long userId) {
+        System.out.println("여기까지됨");
+        System.out.println("request = " + request);
+        System.out.println("userId = " + userId);
         supplementService.saveIntake(request, userId);
     }
 

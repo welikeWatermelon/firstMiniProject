@@ -17,5 +17,6 @@ public class Follow {
     private User user;
 
     @ManyToOne
+    @JoinColumn(name = "pharmacist_id")
     private Pharmacist pharmacist;
 }

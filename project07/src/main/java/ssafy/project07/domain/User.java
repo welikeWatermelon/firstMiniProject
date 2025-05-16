@@ -3,6 +3,8 @@ package ssafy.project07.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import ssafy.project07.domain.enums.Gender;
+import ssafy.project07.domain.enums.UserRole;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,12 +18,21 @@ public class User {
     @GeneratedValue
     private Long id;
     private String name;
-    private String userId;
+    private String email;
     private String password;
     private LocalDate birthDate;
-    private String gender;
+
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
     private String nickname;
     private String profileImage;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Pharmacist pharmacist;
 
     @OneToMany(mappedBy = "user")
     private List<SupplementIntake> supplementIntakes;

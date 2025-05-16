@@ -6,6 +6,7 @@ import ssafy.project07.dto.supplement.SupplementIntakeRequest;
 import ssafy.project07.dto.supplement.AlarmSettingRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ssafy.project07.repository.notification.NotificationRepository;
 import ssafy.project07.repository.supplement.*;
 import ssafy.project07.repository.user.UserRepository;
 

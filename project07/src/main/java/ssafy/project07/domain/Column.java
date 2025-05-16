@@ -18,5 +18,6 @@ public class Column {
     private LocalDateTime createdAt;
 
     @ManyToOne
+    @JoinColumn(name = "pharmacist_id")
     private Pharmacist pharmacist;
 }

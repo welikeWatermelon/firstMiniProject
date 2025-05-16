@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ssafy.project07.domain.User;
-import ssafy.project07.dto.user.UserLoginRequest;
-import ssafy.project07.dto.user.UserProfileRequest;
-import ssafy.project07.dto.user.UserProfileResponse;
-import ssafy.project07.dto.user.UserRegisterRequest;
+import ssafy.project07.dto.user.*;
 import ssafy.project07.repository.user.UserRepository;
 import ssafy.project07.service.UserService;
 
@@ -23,10 +20,18 @@ public class UserController {
         userService.userRegister(userRegisterRequest);
     }
 
+//    @PostMapping("/login")
+//    public void login(@RequestBody UserLoginRequest userLoginRequest) {
+//        userService.userLogin(userLoginRequest);
+//    }
+
+    // 토큰 발급
     @PostMapping("/login")
-    public void login(@RequestBody UserLoginRequest userLoginRequest) {
-        userService.userLogin(userLoginRequest);
+    public ResponseEntity<UserLoginResponse> login(@RequestBody UserLoginRequest userLoginRequest) {
+        UserLoginResponse response = userService.userLogin(userLoginRequest);
+        return ResponseEntity.ok(response);
     }
+
 
     @GetMapping("/profile")
     public ResponseEntity<UserProfileResponse> profile(@RequestParam Long userId) {

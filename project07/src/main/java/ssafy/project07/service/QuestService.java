@@ -58,4 +58,13 @@ public class QuestService {
     }
 
 
+    public boolean isQuestCompletedToday(Long userId) {
+        // 오늘 날짜 기준으로 퀘스트 기록이 있는지 확인
+        LocalDate today = LocalDate.now();
+        return questHistoryRepository.existsByUserIdAndCompletedAtBetween(
+                userId,
+                today.atStartOfDay(),
+                today.plusDays(1).atStartOfDay()
+        );
+    }
 }
