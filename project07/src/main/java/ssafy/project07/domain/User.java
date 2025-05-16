@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import ssafy.project07.domain.enums.Gender;
 import ssafy.project07.domain.enums.UserRole;
+import ssafy.project07.domain.calender.CalendarLog;
 
 import java.time.LocalDate;
 import java.util.List;
