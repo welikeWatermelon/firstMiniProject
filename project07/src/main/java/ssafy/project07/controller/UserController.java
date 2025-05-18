@@ -2,6 +2,7 @@ package ssafy.project07.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import ssafy.project07.domain.User;
 import ssafy.project07.dto.user.*;
@@ -34,8 +35,8 @@ public class UserController {
 
 
     @GetMapping("/profile")
-    public ResponseEntity<UserProfileResponse> profile(@RequestParam Long userId) {
-        return  ResponseEntity.ok(userService.profileGet(userId));
+    public ResponseEntity<UserProfileResponse> profile(@AuthenticationPrincipal User user) {
+        return  ResponseEntity.ok(userService.profileGet(user.getId()));
 
     }
 

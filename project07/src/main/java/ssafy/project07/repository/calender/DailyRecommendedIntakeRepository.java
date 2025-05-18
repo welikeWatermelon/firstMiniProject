@@ -7,5 +7,6 @@ import java.util.Optional;
 
 // 영양소 이름으로 권장량 조회
 public interface DailyRecommendedIntakeRepository extends JpaRepository<DailyRecommendedIntake, Long> {
-    Optional<DailyRecommendedIntake> findByNutrient_Name(String nutrientName);
+    Optional<DailyRecommendedIntake> findByNutrientName(String nutrientName);
+
 }

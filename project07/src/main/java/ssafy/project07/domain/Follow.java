@@ -9,6 +9,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+// N:M 가운데 지점
 public class Follow {
     @Id @GeneratedValue
     private Long id;

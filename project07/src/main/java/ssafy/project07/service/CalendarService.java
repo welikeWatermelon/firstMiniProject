@@ -79,7 +79,7 @@
                 String name = entry.getKey(); //영양제 이름
                 int totalTaken = entry.getValue(); //영양제 섭취량
 
-                int recommended = recommendedIntakeRepository.findByNutrient_Name(name)
+                int recommended = recommendedIntakeRepository.findByNutrientName(name)
                         .map(DailyRecommendedIntake::getRecommendedAmountMg)
                         .orElse(0); // 영양제 권장량
 

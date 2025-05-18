@@ -14,6 +14,7 @@ public class DailyRecommendedIntake {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "nutrient_name")
     private Nutrient nutrient;
 
     private int recommendedAmountMg;

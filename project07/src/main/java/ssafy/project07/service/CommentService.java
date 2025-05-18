@@ -6,12 +6,14 @@ import ssafy.project07.domain.Comment;
 import ssafy.project07.domain.CommunityPost;
 import ssafy.project07.domain.User;
 import ssafy.project07.dto.comment.CommentRequest;
+import ssafy.project07.dto.comment.CommentResponse;
 import ssafy.project07.repository.comment.CommentRepository;
 import ssafy.project07.repository.community.CommunityRepository;
 import ssafy.project07.repository.user.UserRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -21,8 +23,14 @@ public class CommentService {
     private final UserRepository userRepository;
     private final CommunityRepository communityRepository;
 
-    public List<Comment> getCommentsByPostId(Long postId) {
-        return commentRepository.findByCommunityPostId(postId);
+//    public List<Comment> getCommentsByPostId(Long postId) {
+//        return commentRepository.findByCommunityPostId(postId);
+//    }
+
+    public List<CommentResponse> getCommentsByPostId(Long postId) {
+        return commentRepository.findByCommunityPostId(postId).stream()
+                .map(this::convertToResponse)
+                .collect(Collectors.toList());
     }
 
 //    public Long save(CommentRequest request) {
@@ -81,6 +89,15 @@ public class CommentService {
         }
 
         commentRepository.delete(comment);
+    }
+
+    private CommentResponse convertToResponse(Comment comment) {
+        CommentResponse response = new CommentResponse();
+        response.setId(comment.getId());
+        response.setContent(comment.getContent());
+        response.setAuthorName(comment.getUser().getName()); // User의 이름 가져오기
+        response.setCreatedAt(comment.getCreatedAt());
+        return response;
     }
 
 }
