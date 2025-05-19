@@ -58,7 +58,7 @@ public class UserService {
         String token = jwtTokenProvider.createToken(user.getEmail());
 
         // ✅ 로그인 응답 반환
-        return new UserLoginResponse(token);
+        return new UserLoginResponse(token,user.getId());
     }
 
 

@@ -14,10 +14,10 @@ public class Follow {
     @Id @GeneratedValue
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pharmacist_id")
     private Pharmacist pharmacist;
 }

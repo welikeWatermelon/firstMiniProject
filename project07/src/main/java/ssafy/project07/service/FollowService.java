@@ -38,6 +38,10 @@ public class FollowService {
         return followRepository.findByUserId(userId).stream()
                 .map(follow -> {
                     Pharmacist p = follow.getPharmacist();
+
+                    System.out.println("🔥 pharmacist in follow = " + (p != null ? p.getName() : "null"));
+
+
                     FollowResponse res = new FollowResponse();
                     res.setPharmacistId(p.getId());
                     res.setName(p.getName());

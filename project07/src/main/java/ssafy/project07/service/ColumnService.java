@@ -123,4 +123,19 @@ public class ColumnService {
 
         columnRepository.deleteById(columnId);
     }
+
+    public List<ColumnResponse> getAllColumns() {
+        List<Column> columns = columnRepository.findAll();
+        return columns.stream().map(column -> {
+            ColumnResponse res = new ColumnResponse();
+            res.setId(column.getId());
+            res.setTitle(column.getTitle());
+            res.setContent(column.getContent());
+            res.setCreatedAt(column.getCreatedAt());
+            res.setPharmacistName(column.getPharmacist().getName());
+            res.setPharmacistId(column.getPharmacist().getId());
+            return res;
+        }).collect(Collectors.toList());
+    }
+
 }

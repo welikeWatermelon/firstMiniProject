@@ -10,4 +10,6 @@ public class ColumnResponse {
     private String content;
     private LocalDateTime createdAt;
     private String pharmacistName;
+    private Long pharmacistId;
+
 }

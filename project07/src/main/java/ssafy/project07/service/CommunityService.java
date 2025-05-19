@@ -45,6 +45,7 @@ public class CommunityService {
         post.setCreatedAt(LocalDateTime.now());
         post.setUpdatedAt(LocalDateTime.now());
         post.setUser(user);
+        post.setAuthorName(user.getName()); // ✅ 추가!
 
         return communityRepository.save(post).getId();
     }
@@ -84,7 +85,7 @@ public class CommunityService {
         res.setContent(post.getContent());
         res.setCreatedAt(post.getCreatedAt());
         res.setUpdatedAt(post.getUpdatedAt());
-        // res.setAuthorName(post.getUser().getName()); // 필요시
+        res.setAuthorName(post.getUser().getName()); // 필요시
         return res;
     }
 }

@@ -12,4 +12,5 @@ import java.util.List;
 public class DailySummaryResponse {
     private LocalDate date;
     private List<DailyNutrientStatusDto> nutrientStatusList;
+    private List<SupplementIntakeRecordDto> intakeRecords; // ✅ 추가 필드
 }

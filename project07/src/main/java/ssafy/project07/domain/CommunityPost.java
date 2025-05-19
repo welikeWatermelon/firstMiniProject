@@ -15,7 +15,8 @@ public class CommunityPost {
     private Long id;
     private String title;
     private String content;
-    private String imageUrl;
+//    private String imageUrl;
+    private String authorName;
 
     @ElementCollection
     private List<String> supplementTags;
