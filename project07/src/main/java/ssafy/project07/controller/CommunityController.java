@@ -42,7 +42,7 @@ public class CommunityController {
         return ResponseEntity.ok(communityService.createPost(request, user));
     }
 
-    //
+    // 수정
     @PutMapping("/{id}")
     public ResponseEntity<Void> updatePost(@PathVariable Long id,
                                            @RequestBody CommunityRequest request,
@@ -51,6 +51,7 @@ public class CommunityController {
         return ResponseEntity.ok().build();
     }
 
+    // 삭제
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePost(@PathVariable Long id,
                                            @AuthenticationPrincipal User user) {

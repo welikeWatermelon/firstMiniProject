@@ -38,7 +38,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<SupplementIntake> supplementIntakes;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user") // OneToMany는 기본이 LAZY
     private List<QuestHistory> questHistories;
 
     @OneToMany(mappedBy = "user")
